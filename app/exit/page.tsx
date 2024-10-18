@@ -2,9 +2,9 @@ import React from 'react';
 
 const ExitPage = () => {
     return (
-        <div>
+        <section>
             This is Exit Page
-        </div>
+        </section>
     );
 };
 
