@@ -53,6 +53,7 @@ const ProductDetails: React.FC<DetailsProps> = async ({ params }) => {
 				height={640}
 				src={productImage}
 				// loader={imageLoader}
+				loading="eager"
 				alt={title}
 				placeholder="empty"
 			/>

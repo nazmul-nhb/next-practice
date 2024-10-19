@@ -28,7 +28,7 @@ export const getProducts = async (): Promise<
 			// console.error(error.message);
 			return error;
 		} else {
-			console.error("Unexpected Error:", error);
+			// console.error("Unexpected Error:", error);
 			return error as AxiosError;
 		}
 	}
@@ -47,7 +47,7 @@ export const getProductById = async (
 			// console.error(error.message);
 			return error;
 		} else {
-			console.error("Unexpected Error:", error);
+			// console.error("Unexpected Error:", error);
 			return error as AxiosError;
 		}
 	}

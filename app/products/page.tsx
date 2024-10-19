@@ -42,6 +42,7 @@ const ProductsPage = async () => {
 							height={480}
 							src={productImage}
 							alt={title}
+							loading="eager"
 							placeholder="empty"
 						/>
 					</Link>
