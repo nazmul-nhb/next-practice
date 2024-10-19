@@ -18,7 +18,7 @@ const Error = () => {
 			</h1> */}
 			<p className="text-lg text-gray-200 mb-6">
 				Oops! Something went wrong.
-			</p>
+			</p> 
 
 			{/* Retry Button */}
 			<Link
