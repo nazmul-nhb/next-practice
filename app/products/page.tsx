@@ -1,10 +1,26 @@
 // import { products } from "@/data/products";
 import { getProducts } from "@/utilities/fetchData";
+import { AxiosError } from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
 const ProductsPage = async () => {
-	const { totalProducts = 0, products = [] } = await getProducts();
+	const response = await getProducts();
+
+	// Check if result is an AxiosError
+	if (response instanceof AxiosError) {
+		return (
+			<section className="text-center">
+				<h2 className="text-xl font-semibold">
+					Failed to Load Products
+				</h2>
+				<p className="text-red-500">Error: {response.message}</p>
+			</section>
+		);
+	}
+
+	// Destructure only when the result is IProductsResponse
+	const { totalProducts = 0, products = [] } = response;
 
 	return (
 		<section className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

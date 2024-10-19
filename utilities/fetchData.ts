@@ -1,5 +1,5 @@
 import { IProductResponse, IProductsResponse } from "@/types/interfaces";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const productUrl =
 	"https://rtk-product-management-server.vercel.app/products";
@@ -17,12 +17,38 @@ export const productUrl =
 // };
 
 // Using Axios
-export const getProducts = async (): Promise<IProductsResponse> => {
-	const { data } = await axios.get<IProductsResponse>(productUrl);
-	return data;
+export const getProducts = async (): Promise<
+	IProductsResponse | AxiosError
+> => {
+	try {
+		const { data } = await axios.get<IProductsResponse>(productUrl);
+		return data;
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			// console.error(error.message);
+			return error;
+		} else {
+			console.error("Unexpected Error:", error);
+			return error as AxiosError;
+		}
+	}
 };
 
-export const getProductById = async (id: string): Promise<IProductResponse> => {
-	const { data } = await axios.get<IProductResponse>(`${productUrl}/${id}`);
-	return data;
+export const getProductById = async (
+	id: string
+): Promise<IProductResponse | AxiosError> => {
+	try {
+		const { data } = await axios.get<IProductResponse>(
+			`${productUrl}/${id}`
+		);
+		return data;
+	} catch (error) {
+		if (axios.isAxiosError(error)) {
+			// console.error(error.message);
+			return error;
+		} else {
+			console.error("Unexpected Error:", error);
+			return error as AxiosError;
+		}
+	}
 };

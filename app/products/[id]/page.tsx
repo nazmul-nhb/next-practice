@@ -1,7 +1,8 @@
 // "use client"
 // import { products } from "@/data/products";
-import { IProduct } from "@/types/interfaces";
+// import { IProduct } from "@/types/interfaces";
 import { getProductById } from "@/utilities/fetchData";
+import { AxiosError } from "axios";
 import Image from "next/image";
 
 import React from "react";
@@ -14,8 +15,21 @@ interface DetailsProps {
 const ProductDetails: React.FC<DetailsProps> = async ({ params }) => {
 	// const product = products.find((p) => p._id === params.id);
 	const { id } = params;
-	const { product } = await getProductById(id);
-	const { productImage, title, productId, price } = product as IProduct;
+	const response = await getProductById(id);
+
+	// Check if result is an AxiosError
+	if (response instanceof AxiosError) {
+		return (
+			<section className="text-center">
+				<h2 className="text-xl font-semibold">
+					Failed to Load Products
+				</h2>
+				<p className="text-red-500">Error: {response.message}</p>
+			</section>
+		);
+	}
+
+	const { productImage, title, productId, price } = response.product;
 
 	// const imageLoader = ({
 	// 	src,
