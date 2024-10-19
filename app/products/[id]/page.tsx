@@ -1,6 +1,7 @@
 // "use client"
-import { products } from "@/data/products";
+// import { products } from "@/data/products";
 import { IProduct } from "@/types/interfaces";
+import { getProductById } from "@/utilities/fetchData";
 import Image from "next/image";
 
 import React from "react";
@@ -10,8 +11,10 @@ interface DetailsProps {
 		id: string;
 	};
 }
-const ProductDetails: React.FC<DetailsProps> = ({ params }) => {
-	const product = products.find((p) => p._id === params.id);
+const ProductDetails: React.FC<DetailsProps> = async ({ params }) => {
+	// const product = products.find((p) => p._id === params.id);
+	const { id } = params;
+	const { product } = await getProductById(id);
 	const { productImage, title, productId, price } = product as IProduct;
 
 	// const imageLoader = ({
